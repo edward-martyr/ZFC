@@ -1,0 +1,45 @@
+[build-system]
+requires = ["flit_core>=3.5,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "zfc"
+
+[tool.isort]
+multi_line_output = 3
+combine_as_imports = true
+line_length = 88
+profile = "black"
+
+[tool.black]
+line-length = 88
+
+[tool.coverage.report]
+exclude_lines = ["\\.\\.\\.", "pragma: no cover", "@overload"]
+
+[project]
+name = "pyZFC"
+authors = [
+    { name = "Yuanhao 'Nyoeghau' Chen", email = "nyoeghau@nyoeghau.com" },
+]
+dynamic = ["version", "description"]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Development Status :: 3 - Alpha",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+lint = ["black==22.6.0", "flake8==4.0.1", "isort==5.10.1", "mypy==0.971"]
+unittest = ["coverage[toml]"]
+
+[project.urls]
+"Source" = "https://github.com/edward-martyr/ZFC"
+"Bug Tracker" = "https://github.com/edward-martyr/ZFC/issues"
