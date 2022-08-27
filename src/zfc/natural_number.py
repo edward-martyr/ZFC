@@ -46,11 +46,6 @@ class NaturalNumber(AbstractSet):
         instance._nat_num = natural_number
         return instance
 
-    def __init__(self, natural_number: int = 0) -> None:
-        if natural_number < 0:
-            raise ValueError("Natural number must be non-negative.")
-        self._nat_num = natural_number
-
     def __contains__(self, obj: object) -> bool:
         if isinstance(obj, NaturalNumber):
             return self._nat_num > obj._nat_num
@@ -83,7 +78,7 @@ class NaturalNumber(AbstractSet):
     def __rand__(self, other: AbstractSet) -> AbstractSet:
         ...
 
-    def __rand__(self, other: AbstractSet) -> AbstractSet:
+    def __rand__(self, other: AbstractSet) -> AbstractSet:  # pragma: no cover
         return self.__and__(other)
 
     @overload
@@ -107,7 +102,7 @@ class NaturalNumber(AbstractSet):
     def __ror__(self, other: AbstractSet) -> AbstractSet:
         ...
 
-    def __ror__(self, other: AbstractSet) -> AbstractSet:
+    def __ror__(self, other: AbstractSet) -> AbstractSet:  # pragma: no cover
         return self.__or__(other)
 
     @overload
@@ -141,7 +136,7 @@ class NaturalNumber(AbstractSet):
             return self.as_frozenset.__xor__(other.as_frozenset)
         return self.as_frozenset.__xor__(other)
 
-    def __rxor__(self, other: AbstractSet) -> AbstractSet:
+    def __rxor__(self, other: AbstractSet) -> AbstractSet:  # pragma: no cover
         return self.__xor__(other)
 
     def __int__(self) -> int:
@@ -173,7 +168,7 @@ class NaturalNumber(AbstractSet):
             )
         )
 
-    def __radd__(self, other: NaturalNumber | int) -> NaturalNumber:
+    def __radd__(self, other: NaturalNumber | int) -> NaturalNumber:  # pragma: no cover
         return self.__add__(other)
 
     def __repr__(self) -> str:
