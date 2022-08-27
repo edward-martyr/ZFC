@@ -1,5 +1,5 @@
 build:
-	python -m build --wheel --outdir dist/
+	python -m build --wheel --sdist --outdir dist/
 
 build-dependencies:
 	python -m pip install --upgrade pip
@@ -23,7 +23,7 @@ lint:
 	mypy src/zfc
 
 unittest:
-	coverage run --source src.zfc --parallel-mode -m unittest
+	coverage run --source zfc --parallel-mode -m unittest
 	coverage combine
 	coverage xml -i
 

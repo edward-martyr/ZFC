@@ -46,6 +46,11 @@ class NaturalNumber(AbstractSet):
         instance._nat_num = natural_number
         return instance
 
+    def __init__(self, natural_number: int = 0) -> None:
+        if natural_number < 0:
+            raise ValueError("Natural number must be non-negative.")
+        self._nat_num = natural_number
+
     def __contains__(self, obj: object) -> bool:
         if isinstance(obj, NaturalNumber):
             return self._nat_num > obj._nat_num
@@ -70,7 +75,16 @@ class NaturalNumber(AbstractSet):
             return NaturalNumber(min(self._nat_num, other._nat_num))
         return self.as_frozenset.__and__(other)
 
-    __rand__ = __and__
+    @overload
+    def __rand__(self, other: NaturalNumber) -> NaturalNumber:
+        ...
+
+    @overload
+    def __rand__(self, other: AbstractSet) -> AbstractSet:
+        ...
+
+    def __rand__(self, other: AbstractSet) -> AbstractSet:
+        return self.__and__(other)
 
     @overload
     def __or__(self, other: NaturalNumber) -> NaturalNumber:
@@ -85,7 +99,16 @@ class NaturalNumber(AbstractSet):
             return NaturalNumber(max(self._nat_num, other._nat_num))
         return self.as_frozenset.__or__(other)
 
-    __ror__ = __or__
+    @overload
+    def __ror__(self, other: NaturalNumber) -> NaturalNumber:
+        ...
+
+    @overload
+    def __ror__(self, other: AbstractSet) -> AbstractSet:
+        ...
+
+    def __ror__(self, other: AbstractSet) -> AbstractSet:
+        return self.__or__(other)
 
     @overload
     def __sub__(self, other: NaturalNumber) -> NaturalNumber:
@@ -118,7 +141,8 @@ class NaturalNumber(AbstractSet):
             return self.as_frozenset.__xor__(other.as_frozenset)
         return self.as_frozenset.__xor__(other)
 
-    __rxor__ = __xor__
+    def __rxor__(self, other: AbstractSet) -> AbstractSet:
+        return self.__xor__(other)
 
     def __int__(self) -> int:
         return self._nat_num
@@ -149,7 +173,8 @@ class NaturalNumber(AbstractSet):
             )
         )
 
-    __radd__ = __add__
+    def __radd__(self, other: NaturalNumber | int) -> NaturalNumber:
+        return self.__add__(other)
 
     def __repr__(self) -> str:
         return self._nat_num.__repr__()

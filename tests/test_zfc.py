@@ -1,7 +1,7 @@
 from numbers import Number
 from typing import AbstractSet
 
-from src.zfc import NaturalNumber
+from zfc import NaturalNumber
 
 from .utils import BaseTestCase
 
